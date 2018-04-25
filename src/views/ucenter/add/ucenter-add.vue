@@ -1,7 +1,7 @@
 <template>
-    <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="80">
-        <FormItem label="Name" prop="name">
-            <Input v-model="formValidate.name" placeholder="Enter your name"></Input>
+    <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="60">
+        <FormItem label="姓名" prop="nickName">
+            <Input v-model="formValidate.name" placeholder="输入用户名称"></Input>
         </FormItem>
         <FormItem label="E-mail" prop="mail">
             <Input v-model="formValidate.mail" placeholder="Enter your e-mail"></Input>
@@ -12,6 +12,18 @@
                 <Option value="shanghai">London</Option>
                 <Option value="shenzhen">Sydney</Option>
             </Select>
+        </FormItem>
+        <FormItem>
+            <Upload
+                    multiple
+                    type="drag"
+                    action="//jsonplaceholder.typicode.com/posts/">
+                <div style="padding: 20px 0">
+                    <Icon type="ios-cloud-upload" size="52" style="color: #3399ff"></Icon>
+                    <p>Click or drag files here to upload</p>
+                </div>
+            </Upload>
+
         </FormItem>
         <FormItem label="Date">
             <Row>

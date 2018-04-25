@@ -1,5 +1,5 @@
 <style lang="less">
-    @import "../../styles/common.less";
+    @import "../../../styles/common.less";
 </style>
 <template>
     <div>
@@ -8,7 +8,7 @@
                 <Card>
                     <p slot="title">
                         <Icon type="pinpoint"></Icon>
-                        一个条件搜索
+                        条件搜索
                     </p>
                     <Row>
                         <Col span="8">
@@ -20,9 +20,11 @@
                             <Button justify="right" type="primary" icon="ios-search" @click="openModal">添加</Button>
                         </Col>
                         <Modal v-model="modal2" width="360">
-                            <modal2></modal2>
+                            <modal2 ref="modal2"></modal2>
                             <div slot="footer">
-                                <Button type="error" size="large">Delete</Button>
+                                <!--
+                                                                <Button type="success" size="large" @click="saveData">保存</Button>
+                                -->
                             </div>
                         </Modal>
                     </Row>
@@ -32,7 +34,10 @@
 
                             <can-edit-table refs="canEditTable" v-model="editInlineData"
                                             :columns-list="editInlineColumns"
-                                            v-on:listenToChildEvent="sortChange" v-on:listenToFitelEvent="fitelChange"></can-edit-table>
+                                            v-on:listenToChildEvent="sortChange"
+                                            v-on:listenToFitelEvent="fitelChange"
+                                            v-on:listenToDelectEvent="delect"
+                            ></can-edit-table>
 
                         </div>
                         <div style="margin: 10px;overflow: hidden">
@@ -53,12 +58,13 @@
 </template>
 <script>
     import canEditTable from './edit/canEditTable.vue';
-    import tableData from './ucenter-table';
-    import modal2 from './add/ucenter-add.vue';
+    import tableData from './answerBank-table';
+    import modal2 from './add/answerBank-add.vue';
 
     import {
-        pageList
-    } from 'api/moudel/ucenter/index';
+        pageList,
+        delObj
+    } from 'api/moudel/answer/bank/index';
 
     export default {
         name: 'searchable-table',
@@ -78,7 +84,7 @@
                 listQuery: {
                     size: 20, // 条数
                     current: 1, // 查询页
-                    type: 'create_date desc', // 排序
+                    type: 'system_creat_time desc', // 排序
                     whereType: {
                         onOff: false,
                         data: {
@@ -105,6 +111,11 @@
                         this.totalCount = response.object.total;
                     });
             },
+            delObj (obj) {
+                delObj(obj)
+                    .then(response => {
+                    });
+            },
             search (data, argumentObj) {
                 let res = data;
                 let dataClone = data;
@@ -129,7 +140,7 @@
                 this.getList();
             },
             sortChange: function (data) {
-                this.listQuery.type = data.key.replace(/([A-Z])/g, "_$1").toLowerCase() + '  ' + data.order;
+                this.listQuery.type = data.key.replace(/([A-Z])/g, '_$1').toLowerCase() + '  ' + data.order;
                 this.getList();
             },
             fitelChange: function (value, key, type) {
@@ -138,11 +149,14 @@
                     this.getList();
                 } else {
                     this.listQuery.whereType.onOff = true;
-                    this.listQuery.whereType.data.key = key.replace(/([A-Z])/g, "_$1").toLowerCase();
+                    this.listQuery.whereType.data.key = key.replace(/([A-Z])/g, '_$1').toLowerCase();
                     this.listQuery.whereType.data.val = value[0];
                     this.listQuery.whereType.data.type = type;
                     this.getList();
                 }
+            },
+            delect: function (data) {
+                this.delObj(data);
             }
         },
         created () {

@@ -147,7 +147,6 @@
                                                 <img :src="item.url">
                                                 <div class="admin-upload-list-cover">
                                                     <Icon type="ios-eye-outline" @click.native="handleView(item.name)"></Icon>
-                                                    <Icon type="ios-trash-outline" @click.native="handleRemove(item)"></Icon>
                                                 </div>
                                             </template>
                                             <template v-else>
@@ -220,11 +219,7 @@ export default {
             this.imgName = name;
             this.visible = true;
         },
-        handleRemove (file) {
-            // 从 upload 实例删除数据
-            const fileList = this.$refs.upload.fileList;
-            this.$refs.upload.fileList.splice(fileList.indexOf(file), 1);
-        },
+
         handleSuccess2 (res, file) {
             // 因为上传过程为实例，这里模拟添加 url
             file.url = 'https://o5wwk8baw.qnssl.com/7eb99afb9d5f317c912f08b5212fd69a/avatar';

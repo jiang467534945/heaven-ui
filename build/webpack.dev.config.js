@@ -31,6 +31,7 @@ module.exports = merge(webpackBaseConfig, {
         new HtmlWebpackPlugin({
             title: 'iView admin v' + package.version,
             filename: '../index.html',
+            template: './src/template/index.ejs',
             inject: false
         }),
         new CopyWebpackPlugin([
@@ -45,5 +46,31 @@ module.exports = merge(webpackBaseConfig, {
                 'text-editor.vue'
             ]
         })
-    ]
+    ],
+    devServer: {
+        port: 8089,
+        proxy: {
+            '/api': {
+                target: 'http://192.168.0.107:8080',
+                pathRewrite: {'^/api' : ''},
+                changeOrigin: true
+            },
+            '/answerApi': {
+                target: 'http://192.168.0.107:81',
+                pathRewrite: {'^/answerApi' : ''},
+                changeOrigin: true
+            },
+            '/ossApi': {
+                target: 'http://imghzf.nat100.top',
+                pathRewrite: {'^/ossApi' : ''},
+                changeOrigin: true
+            },
+            '/aliOss': {
+                target: 'http://huizhuangfang.oss-cn-beijing.aliyuncs.com',
+                pathRewrite: {'^/aliOss' : ''},
+                changeOrigin: true
+            }
+
+        }
+    }
 });

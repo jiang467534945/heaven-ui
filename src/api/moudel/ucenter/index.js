@@ -2,7 +2,7 @@ import fetch from 'utils/fetch';
 
 export function pageList(query) {
     return fetch({
-        url: '/api/admin/user/page',
+        url: '/api/ucenterUser/pageList',
         method: 'get',
         params: query
     });

@@ -89,7 +89,24 @@ export const appRouter = [
                 name: 'ucenter-table',
                 title: '用户列表',
                 component: () => import('@/views/ucenter/ucenter-table.vue')
+            }
+        ]
+    },
+    {
+        path: '/answer',
+        icon: 'social-buffer',
+        name: 'answer',
+        title: '答题',
+        component: Main,
+        children: [
+            {
+                path: 'answerBank-table',
+                icon: 'compose',
+                name: 'answerBank-table',
+                title: '题库列表',
+                component: () => import('@/views/answer/bank/answerBank-table.vue')
             },
+            /*,
             {
                 path: 'md-editor',
                 icon: 'pound',
@@ -97,13 +114,7 @@ export const appRouter = [
                 title: 'Markdown编辑器',
                 component: () => import('@/views/my-components/markdown-editor/markdown-editor.vue')
             },
-            {
-                path: 'image-editor',
-                icon: 'crop',
-                name: 'image-editor',
-                title: '图片预览编辑',
-                component: () => import('@/views/my-components/image-editor/image-editor.vue')
-            },
+
             {
                 path: 'draggable-list',
                 icon: 'arrow-move',
@@ -139,7 +150,7 @@ export const appRouter = [
                 name: 'split-pane-page',
                 title: 'split-pane',
                 component: () => import('@/views/my-components/split-pane/split-pane-page.vue')
-            }
+            }*/
         ]
     },
     {
