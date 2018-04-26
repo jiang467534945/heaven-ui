@@ -37,6 +37,7 @@
                                             v-on:listenToChildEvent="sortChange"
                                             v-on:listenToFitelEvent="fitelChange"
                                             v-on:listenToDelectEvent="delect"
+                                            v-on:listenToEditEvent="updateChage"
                             ></can-edit-table>
 
                         </div>
@@ -63,7 +64,8 @@
 
     import {
         pageList,
-        delObj
+        delObj,
+        putObj
     } from 'api/moudel/answer/bank/index';
 
     export default {
@@ -157,6 +159,11 @@
             },
             delect: function (data) {
                 this.delObj(data);
+            },
+            updateChage: function (data) {
+                putObj(data.id, data)
+                    .then(response => {
+                    });
             }
         },
         created () {

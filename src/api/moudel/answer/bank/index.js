@@ -32,7 +32,7 @@ export function delObj (id) {
 
 export function putObj (id, obj) {
     return fetch({
-        url: '/api/answer/user/' + id,
+        url: '/answerApi/answerBank/' + id,
         method: 'put',
         data: obj
     });

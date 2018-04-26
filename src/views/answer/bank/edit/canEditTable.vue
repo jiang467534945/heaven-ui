@@ -36,6 +36,8 @@
                         let edittingRow = vm.edittingStore[index];
                         edittingRow.editting = false;
                         edittingRow.saving = false;
+                        vm.updateChage(vm.edittingStore[index]);
+
                         vm.thisTableData = JSON.parse(JSON.stringify(vm.edittingStore));
                         vm.$emit('input', vm.handleBackdata(vm.thisTableData));
                         vm.$emit('on-change', vm.handleBackdata(vm.thisTableData), index);
@@ -284,6 +286,9 @@
                     delete item.saving;
                 });
                 return clonedData;
+            },
+            updateChage (data) {
+                this.$emit('listenToEditEvent', data);
             }
         },
         watch: {

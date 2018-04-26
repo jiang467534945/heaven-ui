@@ -2,6 +2,7 @@ import {formatDate32} from 'utils/date';
 import {
     pageList
 } from 'api/moudel/answer/bank/index';
+
 export const columns1 = [
     {
         type: 'selection',
@@ -137,7 +138,7 @@ export const columns1 = [
         align: 'center',
         width: 190,
         key: 'handle',
-        handle: ['delete']
+        handle: ['edit', 'delete']
     }
 ];
 
